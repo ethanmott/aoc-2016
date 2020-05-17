@@ -1,5 +1,5 @@
 pub mod files {
-    use std::fs::File;
+    use std::fs::{File, read_to_string};
     use std::io::prelude::*;
     use std::io::BufReader;
 
@@ -21,5 +21,10 @@ pub mod files {
             .lines()
             .map(|l| l.expect("Error parsing line."))
             .collect()
+    }
+
+    pub fn get_file_as_string(file_name: &str) -> String {
+        read_to_string(format!("input/{}", file_name))
+            .expect(format!("Couldn't read file with name: {} to a string", file_name).as_str())
     }
 }
